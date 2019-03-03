@@ -68,10 +68,7 @@ class LinkController extends Controller
                 }
             } else
             {
-                return $this->error([
-                    'sender' => $senderDevice,
-                    'receiver' => $receiverDevice
-                ]);
+                return $this->error('incorrectKey');
             }
 
         } else {
@@ -116,5 +113,10 @@ class LinkController extends Controller
         {
             return $this->error('noKeys');
         }
+    }
+
+    public function activeLink()
+    {
+
     }
 }
