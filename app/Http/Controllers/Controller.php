@@ -29,7 +29,7 @@ class Controller extends BaseController
         return $this->remoteAddress->getIpAddress();
     }
 
-    protected function CallAPI($method, $url, $data = false)
+    protected function callAPI($method, $url, $data = false)
     {
         $curl = curl_init();
 

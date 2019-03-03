@@ -117,6 +117,38 @@ class LinkController extends Controller
 
     public function activeLink()
     {
+        if(!empty($_POST['alreadyActivated']) && !empty($_POST['toActivate']))
+        {
+            $alreadyActivated = htmlspecialchars($_POST['alreadyActivated']);
+            $toActivate = htmlspecialchars($_POST['toActivate']);
 
+            $requestingDevice = json_decode($this->deviceController->check($alreadyActivated), true);
+            $toActivate = json_decode($this->deviceController->check($toActivate), true);
+
+            if($requestingDevice['success'] && $toActivate['success'])
+            {
+                if($requestingDevice['data']['bitsky_ip'] == $this->getClientIP())
+                {
+                    $response = $this->callAPI(
+                        'POST',
+                        'http://'.$toActivate['data']['bitsky_ip'].'/active_link',
+                        [
+                            'bitsky_key' => $requestingDevice['data']['bitsky_key']
+                        ]
+                    );
+
+                    return $this->success(json_decode($response));
+                } else
+                {
+                    return $this->error('forbidden');
+                }
+            } else
+            {
+                return $this->error('unrecognizedDevice');
+            }
+        } else
+        {
+            return $this->error('noKeys');
+        }
     }
 }
