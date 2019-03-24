@@ -16,3 +16,6 @@ $router->post('/init', 'DeviceController@init');
 $router->post('/link', 'LinkController@create');
 $router->post('/checkLink', 'LinkController@check');
 $router->post('/activeLink', 'LinkController@activeLink');
+$router->post('/getActiveLinks', 'LinkController@getActiveLinks');
+$router->post('/deleteLink', 'LinkController@delete');
+$router->post('/getKey', 'DeviceController@getKey');
