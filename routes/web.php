@@ -19,3 +19,4 @@ $router->post('/activeLink', 'LinkController@activeLink');
 $router->post('/getActiveLinks', 'LinkController@getActiveLinks');
 $router->post('/deleteLink', 'LinkController@delete');
 $router->post('/getKey', 'DeviceController@getKey');
+$router->post('/getIp', 'DeviceController@getIp');

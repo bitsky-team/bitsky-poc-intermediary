@@ -86,4 +86,25 @@ class DeviceController extends Controller
             return $this->error('forbidden');
         }
     }
+
+    public function getIp()
+    {
+        if(!empty($_POST['bitsky_key']))
+        {
+            $bitsky_key = htmlspecialchars($_POST['bitsky_key']);
+
+            $device = Device::where('bitsky_key', $bitsky_key)->first();
+
+            if(!empty($device))
+            {
+                return $this->success($device->bitsky_ip);
+            }else
+            {
+                return $this->error('notFound');
+            }
+        }else
+        {
+            return $this->error('forbidden');
+        }
+    }
 }
